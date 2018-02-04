@@ -32,12 +32,12 @@ app.route('/resultat')
   .get(function(req, res, next){
 	var cssFile= {style : fs.readFileSync('views/styleResultat.css','utf8')};
 	var tableauResultats= new Array();
+	var tableauReponses = new Array();
 	var total = 0;
 	var i=0;
-	console.log(tableauQuestions);
 	for (var numeroQuestion in req.query){
-		var reponse=req.query[numeroQuestion];
-		if (reponse==tableauQuestions[i].correct_answer){
+		tableauReponses.push(req.query[numeroQuestion]);
+		if (tableauReponses[i]==tableauQuestions[i].correct_answer){
 			total++;
 			tableauResultats.push("Correct");
 		}else{
@@ -66,6 +66,16 @@ app.route('/resultat')
 								resultat8 : tableauResultats[7],
 								resultat9 : tableauResultats[8],
 								resultat10 : tableauResultats[9],
+								reponse1 : tableauReponses[0],
+								reponse2 : tableauReponses[1],
+								reponse3 : tableauReponses[2],
+								reponse4 : tableauReponses[3],
+								reponse5 : tableauReponses[4],
+								reponse6 : tableauReponses[5],
+								reponse7 : tableauReponses[6],
+								reponse8 : tableauReponses[7],
+								reponse9 : tableauReponses[8],
+								reponse10 : tableauReponses[9],
 								cssFile : cssFile});
 });
 
