@@ -9,7 +9,6 @@ var tableauQuestions;
 app.route('/')
   .get(function (req, res) {
 	  request('https://opentdb.com/api.php?amount=10&type=boolean', function(error, response, body){
-	  console.log("request made");
 	  quizz=JSON.parse(body);
 	  tableauQuestions = quizz.results;
       res.render('index.ejs', {q1 : tableauQuestions[0].question, 
@@ -31,10 +30,10 @@ app.route('/resultat')
 	var i=0;
 	for (var numeroQuestion in req.query){
 		var reponse=req.query[numeroQuestion];
-		console.log(reponse + " " + tableauQuestions[i].correct_answer);
 		if (reponse===tableauQuestions[i].correct_answer.toString()){
 			resultat++;
 		}
+		i++;
 	}
 	res.render('resultat.ejs', {resultat : resultat});
 	next();
