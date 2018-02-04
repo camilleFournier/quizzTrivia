@@ -3,7 +3,7 @@ const request = require("request"); //permet d'effectuer simplement la requête 
 const fs = require('fs');
 const app = express();
 
-var tableauQuestions; //tableau rendu par la requête http contenant les questions et les bonnes réponses devant être 
+var tableauQuestions; //tableau rendu par la requête http et partagé par les 2 pages
 /*
 Configuration de la page d'accueil et du questionnaire
 */
@@ -26,7 +26,11 @@ app.route('/')
 });
 
 /*
-Configuration de la page de résultat et calcul du résultat
+Configuration de la page de résultat et calcul du résultat. 
+On mémorise chaque réponse de l'utiliseur et le résultat de la question dans 2 tableaux.
+Puis, on les envoie à la page html. 
+N'ayant pas trouver de moyens pour gérer l'envoi de données,
+j'ai du chaque envoi un à un.
 */
 app.route('/resultat')
   .get(function(req, res, next){
