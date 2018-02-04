@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require("request"); //permet d'effectuer simplement la requête http de l'API
-const fs = require('fs');
+const fs = require('fs'); //apparement nécessaire pour l'intégration du fichier css dans le html
 const app = express();
 
 var tableauQuestions; //tableau rendu par la requête http et partagé par les 2 pages
