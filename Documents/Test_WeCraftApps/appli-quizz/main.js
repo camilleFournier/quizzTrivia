@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require("request");
 const EventEmitter = require('events');
+const ejs = require('ejs');
 
 const app = express();
 
@@ -11,16 +12,20 @@ app.route('/')
 	  request('https://opentdb.com/api.php?amount=10&type=boolean', function(error, response, body){
 	  quizz=JSON.parse(body);
 	  tableauQuestions = quizz.results;
-      res.render('index.ejs', {q1 : tableauQuestions[0].question, 
-	                           q2 : tableauQuestions[1].question, 
-							   q3 : tableauQuestions[2].question,
-							   q4 : tableauQuestions[3].question,
-							   q5 : tableauQuestions[4].question,
-							   q6 : tableauQuestions[5].question,
-							   q7 : tableauQuestions[6].question,
-							   q8 : tableauQuestions[7].question,
-							   q9 : tableauQuestions[8].question,
-							   q10 : tableauQuestions[9].question});
+	  var questions = new Array();
+	  for (var i=0; i<10; i++){
+		  questions[i] = tableauQuestions[i].question.toString();
+	  };
+      res.render('index.ejs', {q1 : questions[0], 
+	                           q2 : questions[1], 
+							   q3 : questions[2],
+							   q4 : questions[3],
+							   q5 : questions[4],
+							   q6 : questions[5],							   
+							   q7 : questions[6],
+							   q8 : questions[7],
+							   q9 : questions[8],
+							   q10 : questions[9]});
 	});
 });
 
